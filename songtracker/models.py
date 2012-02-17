@@ -9,6 +9,7 @@ class Song(models.Model):
         return self.song_name
     
 class Room(models.Model):
+    room_id = models.CharField(verbose_name = "Room ID", max_length = 100)
     room_url = models.URLField(verbose_name = 'Room URL', max_length = 200)
     room_name = models.CharField(verbose_name = 'Room Name', max_length = 100)
     
