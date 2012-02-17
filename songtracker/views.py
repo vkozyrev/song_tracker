@@ -49,13 +49,13 @@ def songPlayed(request):
             roomSongInfo.save()
             
         except:
-            roomSongInfo = RoomSongInfo(room = requestRoom, song = requestSong, player_name = playedBy, time_last_played = datetime.datetime.now(), times_played = 0)
+            roomSongInfo = RoomSongInfo(room = requestRoom, song = requestSong, player_name = playedBy, time_last_played = datetime.datetime.now(), times_played = 1)
             roomSongInfo.save()
             lastPlayedBy = "First Time Played"
             lastPlayedTime = "0"
             numberOfPlays = 0
         
-        returnMap = {"success": True, "timesPlayed": roomSongInfo.times_played, "lastPlayedBy": lastPlayedBy, "lastPlayedTime": str(lastPlayedTime)}
+        returnMap = {"success": True, "timesPlayed": numberOfPlays, "lastPlayedBy": lastPlayedBy, "lastPlayedTime": str(lastPlayedTime)}
         return HttpResponse(json.dumps(returnMap))
         #return HttpResponse(requestRoom.room_name + " " + requestSong.song_artist + " " + requestSong.song_name + " " + str(roomSongInfo.times_played) + " " + lastPlayedBy + " " + str(lastPlayedTime))
     else:
