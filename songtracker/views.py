@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.http import Http404
 from django.http import HttpResponse
 from django.core import serializers
-import datetime
+import datetime, json
 from song_tracker.songtracker.models import Song, Room, RoomSongInfo 
 
 SECRET_ID = "auugnsogb92nflac825nwapbps94n2e3"
@@ -53,7 +53,11 @@ def songPlayed(request):
             lastPlayedTime = "0"
             numberOfPlays = 0
         
-        return HttpResponse(requestRoom.room_name + " " + requestSong.song_artist + " " + requestSong.song_name + " " + str(roomSongInfo.times_played) + " " + lastPlayedBy + " " + str(lastPlayedTime))
+        returnMap = {"success": True, "timesPlayed": roomSongInfo.times_played, "lastPlayedBy": lastPlayedBy, "lastPlayedTime": str(lastPlayedTime)}
+        return HttpResponse(json.dumps(returnMap))
+        #return HttpResponse(requestRoom.room_name + " " + requestSong.song_artist + " " + requestSong.song_name + " " + str(roomSongInfo.times_played) + " " + lastPlayedBy + " " + str(lastPlayedTime))
     else:
         
-        return HttpResponse("ERROR!")
+        returnMap = {"success": False}
+        return HttpResponse(json.dumps(returnMap))
+        #return HttpResponse("ERROR!")
