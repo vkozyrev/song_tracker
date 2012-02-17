@@ -11,6 +11,8 @@ SECRET_ID = "auugnsogb92nflac825nwapbps94n2e3"
 '''
 test example url
 http://127.0.0.1:8000/songPlayed?roomName=Coding%20Soundtrack&roomID=4ded3b7e99968e1d29000047&roomURL=http%3A%2F%2Fturntable.fm%2Fcoding_soundtrack3&playedBy=Strngr_Lzr&songArtist=Calvin%20Harris&songName=The%20Rain&secretID=auugnsogb92nflac825nwapbps94n2e3
+
+songtracker.vladimirkozyrev.com/songPlayed?roomName=name&roomID=id&roomURL=url&playedBy=dj&songArtist=artist&songName=song&secretID=key
 '''
 
 def songPlayed(request):
