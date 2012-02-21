@@ -4,7 +4,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.core import serializers
 import datetime, json
-from song_tracker.songtracker.models import Song, Room, RoomSongInfo 
+from song_tracker.songtracker.models import Song, Room, RoomSongInfo, CatFact 
 
 SECRET_ID = "auugnsogb92nflac825nwapbps94n2e3"
 
@@ -14,6 +14,22 @@ http://127.0.0.1:8000/songPlayed?roomName=Coding%20Soundtrack&roomID=4ded3b7e999
 
 songtracker.vladimirkozyrev.com/songPlayed?roomName=name&roomID=id&roomURL=url&playedBy=dj&songArtist=artist&songName=song&secretID=key
 '''
+
+def catFact(request):
+    myFile = open('/home/vkozyrev/webapps/song_tracker/song_tracker/songtracker/catfacts', 'r')
+    for line in myFile:
+        obj = CatFact(fact = line);
+        obj.save();
+    return HttpResponse("FACTS ADDED!")
+
+def songVotes(request):
+    return False
+
+def songHearted(request):
+    return False
+
+def getSongInfo(request):
+    return False
 
 def songPlayed(request):
     
@@ -49,6 +65,8 @@ def songPlayed(request):
             roomSongInfo.save()
             
         except:
+            x = datetime.datetime.now()
+            print x
             roomSongInfo = RoomSongInfo(room = requestRoom, song = requestSong, player_name = playedBy, time_last_played = datetime.datetime.now(), times_played = 1)
             roomSongInfo.save()
             lastPlayedBy = "First Time Played"

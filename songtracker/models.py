@@ -1,5 +1,11 @@
 from django.db import models
 
+class CatFact(models.Model):
+    fact = models.CharField(verbose_name = "Cat Fact", max_length = 500)
+    
+    def __unicode__(self):
+        return self.fact
+
 class Song(models.Model):
     song_name = models.CharField(verbose_name = 'Song Name', max_length = 100)
     song_artist = models.CharField(verbose_name = 'Song Artist', max_length = 100)
