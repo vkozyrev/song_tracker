@@ -1,2 +1,5 @@
 # Databses #
 *.db
+
+# Files #
+*.pyc
