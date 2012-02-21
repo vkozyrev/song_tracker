@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.http import Http404
 from django.http import HttpResponse
 from django.core import serializers
-import datetime, json
+import datetime, json, random
 from song_tracker.songtracker.models import Song, Room, RoomSongInfo, CatFact 
 
 SECRET_ID = "auugnsogb92nflac825nwapbps94n2e3"
@@ -16,11 +16,14 @@ songtracker.vladimirkozyrev.com/songPlayed?roomName=name&roomID=id&roomURL=url&p
 '''
 
 def catFact(request):
-    myFile = open('/home/vkozyrev/webapps/song_tracker/song_tracker/songtracker/catfacts', 'r')
-    for line in myFile:
-        obj = CatFact(fact = line);
-        obj.save();
-    return HttpResponse("FACTS ADDED!")
+    facts = CatFact.objects.all();
+    random.seed()
+    rand = random.randint(0, (CatFact.objects.count() - 1))
+    if facts:
+        returnMap = {"success": True, "catFact": str(facts[rand])}
+    else:
+        returnMap = {"success": False}
+    return HttpResponse(json.dumps(returnMap))
 
 def songVotes(request):
     return False
