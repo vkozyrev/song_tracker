@@ -26,13 +26,13 @@ def catFact(request):
     return HttpResponse(json.dumps(returnMap))
 
 def songVotes(request):
-    return False
+    return HttpResponse('Song Votes')
 
 def songHearted(request):
-    return False
+    return HttpResponse('Song Hearted')
 
 def getSongInfo(request):
-    return False
+    return HttpResponse('Song Info')
 
 def songPlayed(request):
     
